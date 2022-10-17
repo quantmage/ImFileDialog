@@ -19,6 +19,7 @@
 #include <shellapi.h>
 #include <lmcons.h>
 #pragma comment(lib, "Shell32.lib")
+#undef NOMINMAX
 #else
 #include <unistd.h>
 #include <pwd.h>
