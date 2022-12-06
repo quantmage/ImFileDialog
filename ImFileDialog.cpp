@@ -343,7 +343,7 @@ namespace ifd {
 		DateModified = attr.st_ctime;
 
 		HasIconPreview = false;
-		IconPreview = nullptr;
+		IconPreview = 0;
 		IconPreviewData = nullptr;
 		IconPreviewHeight = 0;
 		IconPreviewWidth = 0;
@@ -706,7 +706,7 @@ namespace ifd {
 		}
 	}
 
-	void* FileDialog::m_getIcon(const std::filesystem::path& path)
+	ImTextureID FileDialog::m_getIcon(const std::filesystem::path& path)
 	{
 #ifdef _WIN32
 		if (m_icons.count(path.u8string()) > 0)
@@ -715,7 +715,7 @@ namespace ifd {
 		std::string pathU8 = path.u8string();
 
 		std::error_code ec;
-		m_icons[pathU8] = nullptr;
+		m_icons[pathU8] = (ImTextureID)0;
 
 		DWORD attrs = 0;
 		UINT flags = SHGFI_ICON | SHGFI_LARGEICON;
@@ -732,7 +732,7 @@ namespace ifd {
 		SHGetFileInfoW(pathW.c_str(), attrs, &fileInfo, sizeof(SHFILEINFOW), flags);
 
 		if (fileInfo.hIcon == nullptr)
-			return nullptr;
+			return (ImTextureID)0;
 
 		// check if icon is already loaded
 		auto itr = std::find(m_iconIndices.begin(), m_iconIndices.end(), fileInfo.iIcon);
@@ -749,14 +749,14 @@ namespace ifd {
 		GetIconInfo(fileInfo.hIcon, &iconInfo);
 		
 		if (iconInfo.hbmColor == nullptr)
-			return nullptr;
+			return (ImTextureID)0;
 
 		DIBSECTION ds;
 		GetObject(iconInfo.hbmColor, sizeof(ds), &ds);
 		int byteSize = ds.dsBm.bmWidth * ds.dsBm.bmHeight * (ds.dsBm.bmBitsPixel / 8);
 
 		if (byteSize == 0)
-			return nullptr;
+			return (ImTextureID)0;
 
 		uint8_t* data = (uint8_t*)malloc(byteSize);
 		GetBitmapBits(iconInfo.hbmColor, byteSize, data);
@@ -772,7 +772,7 @@ namespace ifd {
 
 		std::string pathU8 = path.u8string();
 
-		m_icons[pathU8] = nullptr;
+		m_icons[pathU8] = 0;
 
 		std::error_code ec;
 		int iconID = 1;

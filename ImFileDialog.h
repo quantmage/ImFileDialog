@@ -47,8 +47,8 @@ namespace ifd {
 		}
 		inline float GetZoom() { return m_zoom; }
 
-		std::function<void*(uint8_t*, int, int, char)> CreateTexture; // char -> fmt -> { 0 = BGRA, 1 = RGBA }
-		std::function<void(void*)> DeleteTexture;
+		std::function<ImTextureID(uint8_t*, int, int, char)> CreateTexture; // char -> fmt -> { 0 = BGRA, 1 = RGBA }
+		std::function<void(ImTextureID)> DeleteTexture;
 
 		class FileTreeNode {
 		public:
@@ -78,7 +78,7 @@ namespace ifd {
 			time_t DateModified;
 
 			bool HasIconPreview;
-			void* IconPreview;
+			ImTextureID IconPreview;
 			uint8_t* IconPreviewData;
 			int IconPreviewWidth, IconPreviewHeight;
 		};
@@ -113,8 +113,8 @@ namespace ifd {
 
 		std::vector<int> m_iconIndices;
 		std::vector<std::string> m_iconFilepaths; // m_iconIndices[x] <-> m_iconFilepaths[x]
-		std::unordered_map<std::string, void*> m_icons;
-		void* m_getIcon(const std::filesystem::path& path);
+		std::unordered_map<std::string, ImTextureID> m_icons;
+		ImTextureID m_getIcon(const std::filesystem::path& path);
 		void m_clearIcons();
 		void m_refreshIconPreview();
 		void m_clearIconPreview();
