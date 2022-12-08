@@ -15,8 +15,10 @@
 #define IFD_DIALOG_DIRECTORY	1
 #define IFD_DIALOG_SAVE			2
 
+#ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
 
 
 namespace ifd {
@@ -146,4 +148,6 @@ namespace ifd {
 	};
 }
 
+#ifdef __clang__
 #pragma clang diagnostic pop
+#endif
