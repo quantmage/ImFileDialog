@@ -15,6 +15,10 @@
 #define IFD_DIALOG_DIRECTORY	1
 #define IFD_DIALOG_SAVE			2
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+
 namespace ifd {
 	class FileDialog {
 	public:
@@ -141,3 +145,5 @@ namespace ifd {
 		void m_renderFileDialog();
 	};
 }
+
+#pragma clang diagnostic pop
