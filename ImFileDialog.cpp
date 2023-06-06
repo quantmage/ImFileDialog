@@ -1,12 +1,12 @@
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include "ImFileDialog.h"
 
 #include <fstream>
 #include <algorithm>
 #include <sys/stat.h>
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
 
