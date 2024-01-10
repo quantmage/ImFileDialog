@@ -11,7 +11,7 @@
 #include <imgui/imgui_internal.h>
 
 // #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "stb_hello_imgui/stb_image.h"
 
 #ifdef _WIN32
 #define NOMINMAX
